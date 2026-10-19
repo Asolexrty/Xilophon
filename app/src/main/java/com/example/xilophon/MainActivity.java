@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Creo il SoundPool
         AudioAttributes attributes = new AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_MEDIA)
                 .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
@@ -51,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 .setAudioAttributes(attributes)
                 .build();
 
-        // Carico i suoni
+
         mDoSoundId  = mSoundPool.load(this, R.raw.note1_c, 1);
         mReSoundId  = mSoundPool.load(this, R.raw.note2_d, 1);
         mMiSoundId  = mSoundPool.load(this, R.raw.note3_e, 1);
@@ -60,14 +59,37 @@ public class MainActivity extends AppCompatActivity {
         mLaSoundId  = mSoundPool.load(this, R.raw.note6_a, 1);
         mSiSoundId  = mSoundPool.load(this, R.raw.note7_b, 1);
 
-        // Collego i tasti ai suoni
-        findViewById(R.id.tasto_do).setOnClickListener(v -> play(mDoSoundId));
-        findViewById(R.id.tasto_re).setOnClickListener(v -> play(mReSoundId));
-        findViewById(R.id.tasto_mi).setOnClickListener(v -> play(mMiSoundId));
-        findViewById(R.id.tasto_fa).setOnClickListener(v -> play(mFaSoundId));
-        findViewById(R.id.tasto_sol).setOnClickListener(v -> play(mSolSoundId));
-        findViewById(R.id.tasto_la).setOnClickListener(v -> play(mLaSoundId));
-        findViewById(R.id.tasto_si).setOnClickListener(v -> play(mSiSoundId));
+
+        View.OnClickListener tastoListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int id = v.getId();
+
+                if (id == R.id.tasto_do) {
+                    play(mDoSoundId);
+                } else if (id == R.id.tasto_re) {
+                    play(mReSoundId);
+                } else if (id == R.id.tasto_mi) {
+                    play(mMiSoundId);
+                } else if (id == R.id.tasto_fa) {
+                    play(mFaSoundId);
+                } else if (id == R.id.tasto_sol) {
+                    play(mSolSoundId);
+                } else if (id == R.id.tasto_la) {
+                    play(mLaSoundId);
+                } else if (id == R.id.tasto_si) {
+                    play(mSiSoundId);
+                }
+            }
+        };
+
+        findViewById(R.id.tasto_do).setOnClickListener(tastoListener);
+        findViewById(R.id.tasto_re).setOnClickListener(tastoListener);
+        findViewById(R.id.tasto_mi).setOnClickListener(tastoListener);
+        findViewById(R.id.tasto_fa).setOnClickListener(tastoListener);
+        findViewById(R.id.tasto_sol).setOnClickListener(tastoListener);
+        findViewById(R.id.tasto_la).setOnClickListener(tastoListener);
+        findViewById(R.id.tasto_si).setOnClickListener(tastoListener);
     }
 
     private void play(int soundId) {
